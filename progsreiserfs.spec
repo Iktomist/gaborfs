@@ -1,0 +1,99 @@
+Name: 	 progsreiserfs
+Version: 0.3.1-rc8
+Release: 1
+
+Summary: Programs needed for manipulating reiserfs partitions
+License: GPL
+Group: System/Configuration/Hardware
+Url:  http://reiserfs.linux.kiev.ua
+
+Source: ftp://reiserfs.linux.kiev.ua/%name-%version.tar.gz
+Requires: lib%name = %version-%release
+
+%package -n lib%name
+Summary: Shared library for reiserfs utilities
+Group: System/Libraries
+
+%package -n lib%name-devel
+Summary: Files required to compile software that uses lib%name
+Group: Development/C
+Requires: lib%name = %version-%release
+Provides: %name-devel = %version
+Obsoletes: %name-devel
+
+%package -n lib%name-devel-static
+Summary: Files required to compile statically linked software that uses lib%name
+Group: Development/C
+Requires: lib%name = %version-%release
+Provides: %name-devel-static = %version
+Obsoletes: %name-devel-static
+
+%description
+progsreiserfs is a package that allows you to create, destroy,
+resize and copy reiserfs filesystem.
+
+%description -n lib%name
+This package includes the shared library needed to
+run lib%name-based software.
+
+%description -n lib%name-devel
+This package includes the header files.
+
+%description -n lib%name-devel-static
+This package includes the libraries needed to
+statically link software with lib%name.
+
+%prep
+%setup -q
+
+%build
+%configure
+make
+
+%install
+%makeinstall
+%find_lang %name
+
+%post -n lib%name -p /sbin/ldconfig
+%postun -n lib%name -p /sbin/ldconfig
+
+%files -n lib%name
+%_libdir/*.so.*
+%_libdir/*.la
+
+%files -n lib%name-devel
+%_libdir/*.so
+%_includedir/*
+
+%files -n lib%name-devel-static
+%_libdir/*.a
+
+%files -f %name.lang
+%_sbindir/*
+%_mandir/*
+%doc AUTHORS BUGS ChangeLog NEWS README THANKS TODO COPYING.NAMESYS COPYING doc/API demos/*.c
+
+%changelog
+* Mon Apr 28 2002 Yury Umanets <torque@ukrpost.net> progsreiserfs-0.3.0.1-3
+- spec fixes (added demos)
+
+* Mon Apr 23 2002 Yury Umanets <torque@ukrpost.net> progsreiserfs-0.3.0.1-2
+- spec fixes (added manuals)
+
+* Mon Apr 23 2002 Yury Umanets <torque@ukrpost.net> progsreiserfs-0.3.0.1-1
+- New version
+
+* Mon Feb 18 2002 Yury Umanets <torque@ukrpost.net> progsreiserfs-0.1.6-2
+- Copyright information fixed.
+- progsreiserfs.spec fixed.
+- THANKS file added.
+- COPYING.NAMESYS added.
+
+* Sun Feb 16 2002 Yury Umanets <torque@ukrpost.net> progsreiserfs-0.1.6-1
+- New version of the progsreiserfs
+
+* Mon Feb 11 2002 Yury Umanets <torque@ukrpost.net> progsreiserfs-0.1.5-2
+- Some progsreiserfs.spec fixes.
+
+* Mon Feb 11 2002 Yury Umanets <torque@ukrpost.net> progsreiserfs-0.1.5-1
+- Initial release

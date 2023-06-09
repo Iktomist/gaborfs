@@ -1,0 +1,18 @@
+This file is part of progsreiserfs
+Copyright (C) 2001, 2002 Yury Umanets
+
+-------------------------------------------------------------------------------
+
+Apparantly we need to keep track of who did everything, for copyright
+reasons (see the Maintainer Howto on www.gnu.org)
+
+Yury Umanets <torque@ukrpost.net>
+    * all filesystem code including journal, bitmap, tools, etc. Also device 
+    abstraction layer, reiserfs balanced tree code and file access and dir access
+    code.
+    
+Andrew Clausen <clausen@gnu.org>
+    * exception handling, debuging and endianess code.
+
+Alexander Zhukov <szhukov@priocom.com>
+    * SunOS ans FreeBSD ports.

@@ -1,0 +1,271 @@
+#!/bin/sh
+
+#
+#  reiserfs testing functions
+#  Copyright (C) 2001, 2002 Yury Umanets <torque@ukrpost.net>, see COPYING for 
+#  licensing and copyright details.
+
+. $(dirname $0)/functions
+
+pdf() {
+    gnudf="`df --version 2>/dev/null`"
+
+    [ ! -z "$gnudf" ] && df -P $* && return 0
+    [ $(uname) = "SunOS" ] && df -k $* && return 0
+}
+
+do_loop() {
+    loop=$1
+    if [ ! -x /bin/dd ]; then
+	echo "Couldn't find /bin/dd program"
+	return 1	
+    fi
+	
+    /bin/dd if=/dev/zero of=$loop bs=1024 count=102400
+
+    return $?
+}
+
+do_examine() {
+    size=$1
+    available=$(pdf /tmp | awk '{print $4}' | tail -1)
+    if [ $available -ge $size ]; then
+		return 0
+    else
+        return 1
+    fi
+}
+
+do_init() {
+    local loop1=$1
+    local loop2=$2
+
+    do_loop $loop1 || return 1
+    do_loop $loop2 || return 1
+    
+    return $?
+}
+
+do_cleanup() {
+    local loop1=$1
+    local loop2=$2
+    rm -f $loop1 > /dev/null 2>&1
+    rm -f $loop2 > /dev/null 2>&1
+    
+    return $?
+}
+
+do_test() {
+
+    local format=$1
+    
+    local loop1=$2
+    local loop2=$3
+    
+    for bs in 1024 2048 4096 8192; do
+    
+	test_mkfs -f$format -b$bs $loop1 || {
+	    failure "mkfs -f$format -b$bs $loop1 for blocksize $bs and version $format"
+	    echo "Couldn't create reiserfs $format. All subtests will be skipped."
+	    continue
+	}
+
+	check $loop1 || {
+	    failure "mkfs -f$format -b$bs $loop1 for blocksize $bs and version $format"
+	    echo "Filesystem isn't correct. All tests will be skipped."
+	    continue
+	}
+
+	test_dir $loop1 || {
+	    failure "ls $loop1 / for blocksize $bs and version $format"
+	    echo "Dir tests on empty filesystem failed."
+	}
+		
+	test_lookup $loop1 1 2 || {
+	    failure "lookup $loop1 1 2 for blocksize $bs and version $format"
+	    echo "Looking up for root leaf failed."
+	}
+	
+	test_resizefs $loop1 0M 70M || {
+	    failure "resizefs $loop1 70M for blocksize $bs and version $format"
+	    echo "Couldn't shrink reiserfs $format to 70M. Tests will be skipped."
+	    continue
+	}
+
+	check $loop1 || {
+	    failure "resizefs $loop1 70M for blocksize $bs and version $format"
+	    echo "Filesystem isn't correct. All tests will be skipped."
+	    continue
+	}
+	
+	test_resizefs -f $loop1 0M 5M || {
+	    failure "resizefs -f $loop1 5M for blocksize $bs and version $format"
+	    echo "Couldn't shrink reiserfs $format to minimum size. Tests will be skipped."
+	    continue
+	}
+
+	check $loop1 || {
+	    failure "resizefs -f $loop1 5M for blocksize $bs and version $format"
+	    echo "Filesystem isn't correct. All tests will be skipped."
+	    continue
+	}
+
+	test_resizefs $loop1 0M 100M || {
+	    failure "resizefs $loop1 100M for blocksize $bs and version $format"
+	    echo "Couldn't resize reiserfs $format to 100M. Tests will be skipped."
+	    continue
+	}
+
+	check $loop1 || {
+	    failure "resizefs $loop1 100M for blocksize $bs and version $format"
+	    echo "Filesystem isn't correct. All tests will be skipped."
+	    continue
+	}
+	
+	test_tunefs -s8195 $loop1 || {
+	    failure "tunefs -s8195 $loop1 for blocksize $bs and version $format"
+	    echo "Couldn't resize standard journal"
+	    continue
+	}
+
+	check $loop1 || {
+	    failure "tunefs -s8195 $loop1 for blocksize $bs and version $format"
+	    echo "Filesystem isn't correct. All tests will be skipped."
+	    continue
+	}
+	
+	test_tunefs -s8192 $loop1 || {
+	    failure "tunefs -s8192 $loop1 for blocksize $bs and version $format"
+	    echo "Couldn't resize standard journal"
+	    continue
+	}
+
+	check $loop1 || {
+	    failure "tunefs -s8192 $loop1 for blocksize $bs and version $format"
+	    echo "Filesystem isn't correct. All tests will be skipped."
+	    continue
+	}
+	
+	test_cpfs $loop1 $loop2 || {
+	    failure "cpfs $loop1 $loop2 for blocksize $bs and version $format"
+	    echo "Couldn't copy reiserfs $format. Tests will be skipped."
+	    continue
+	}
+
+	check $loop2 || {
+	    failure "cpfs $loop1 $loop2 for blocksize $bs and version $format"
+	    echo "Filesystem isn't correct. All tests will be skipped."
+	    continue
+	}
+	
+	[ "$format" = "3.6" ] && {
+	    test_label -lprogsreiserfs $loop1 || {
+		failure "tunefs -lprogsreiserfs $loop1 for blocksize $bs and version $format"
+		echo "Tune tests for reiserfs $format are failed."
+		continue
+	    }
+	    action "Checking tunning results" check_label $loop1 "progsreiserfs"
+	
+	    check $loop2 || {
+		failure "tunefs -lprogsreiserfs $loop1 for blocksize $bs and version $format"
+		echo "Filesystem isn't correct. All tests will be skipped."
+		continue
+	    }
+	}
+	
+	test_mkfs -f$format -b$bs -j$loop2 $loop1 || {
+	    failure "mkfs -f$format -b$bs -j$loop2 $loop1 for blocksize $bs and version $format"
+	    echo "Couldn't create reiserfs $format with relocated journal. All subtests will be skipped."
+	    continue
+	}
+
+	check -j$loop2 $loop1 || {
+	    failure "mkfs -f$format -b$bs -j$loop2 $loop1 for blocksize $bs and version $format"
+	    echo "Filesystem isn't correct. All tests will be skipped."
+	    continue
+	}
+
+	test_tunefs -j$loop2 -d$loop1 $loop1 || {
+	    failure "tunefs -j$loop2 -d$loop1 $loop1 for blocksize $bs and version $format"
+	    echo "Couldn't switch reiserfs $format into standard journal mode. All subtests will be skipped."
+	    continue
+	}
+	
+	check $loop1 || {
+	    failure "tunefs -j$loop2 -d$loop1 $loop1 for blocksize $bs and version $format"
+	    echo "Filesystem isn't correct. All tests will be skipped."
+	    continue
+	}
+	
+	test_tunefs -d$loop2 $loop1 || {
+	    failure "tunefs -d$loop2 $loop1 for blocksize $bs and version $format"
+	    echo "Couldn't switch reiserfs $format into relocated journal mode. All subtests will be skipped."
+	    continue
+	}
+	
+	check -j$loop2 $loop1 || {
+	    failure "tunefs -d$loop2 $loop1 for blocksize $bs and version $format"
+	    echo "Filesystem isn't correct. All tests will be skipped."
+	    continue
+	}
+    done
+
+    return $?
+}
+
+# Initialization
+dev1="/tmp/loop-dev1"
+dev2="/tmp/loop-dev2"
+
+case $(uname) in
+    "Linux");;
+    "SunOS");;
+    "FreeBSD");;
+    *)
+	echo "$(uname) not supported"
+	exit 1
+    ;;
+esac
+
+[ ! -x $tests_home/../progsreiserfs/mkfs/mkfs.reiserfs ] && {
+    echo "Couldn't find built utilities. Possible you forgot to build progsreiserfs."
+    exit 1
+}
+
+do_cleanup $dev1 $dev2
+
+action "Checking for free space" do_examine 409600
+
+[ ! $? -eq 0 ] && {
+    echo "Not enought free space. All tests are skipped."
+    exit 1
+}
+
+action "Initializing tests factory" do_init $dev1 $dev2
+
+[ ! $? -eq 0 ] && {
+    echo "Couldn't initialize tests factory. All tests are skipped."
+    exit 1
+}
+
+# Tests
+for format in 3.5 3.6; do
+    echo
+    echo "Testing reiserfs $format"
+    echo "--------------------"
+    do_test $format $dev1 $dev2
+done
+
+# Cleanups
+echo 
+action "Finalizing tests factory" do_cleanup $dev1 $dev2
+echo 
+
+if [ -z "$failures" ]; then
+    echo "The all tests are successfull."
+else
+    echo "Test failures detected:"
+    echo -e $failures
+fi
+
+exit 0

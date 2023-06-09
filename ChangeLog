@@ -1,0 +1,629 @@
+This file is part of progsreiserfs
+Copyright (C) 2001, 2002 Yury Umanets <torque@ukrpost.net>
+
+This file may be modified and/or distributed without restriction.  This is
+not an invitation to misrepresent the history of progsreiserfs.
+
+2002-30-10 Yury Umanets <torque@ukrpost.net>
+    * fixed st_blocks in root directory creating code
+    * fixes in bitmap code.
+    * a lot of fixes in file.c
+    * moved out loff_t using
+    
+2002-28-10 Yury Umanets <torque@ukrpost.net>
+    * released progsreiserfs-0.3.1-rc8
+    * Added dirid and objid into reading of direntry
+    * Cleanups in ket.c and dir.c
+    * A lot of fixes related to smart resizing.
+    
+2002-26-10 Yury Umanets <torque@ukrpost.net>
+    * FreeBSD fixes by Alexander Zhukov <szhukov@priocom.com>
+    * Cygwin port by Christophe Grenier <grenier@cgsecurity.org>
+    * fixes in dal_stat
+    
+2002-25-10 Yury Umanets <torque@ukrpost.net>
+    * released progsreiserfs-0.3.1-rc7
+    * FreeBSD ported by Alexander Zhukov <szhukov@priocom.com>
+    * fixes in reiserfs_object_make_absolute_name function made by 
+      Christophe Grenier <grenier@cgsecurity.org>
+
+2002-04-08 Yury Umanets <torque@ukrpost.net>
+    * released progsreiserfs-0.3.1-rc6
+    * changes in gauge.
+    * added detail error messages for all io exceptions.
+
+2002-03-08 Yury Umanets <torque@ukrpost.net>
+    * released progsreiserfs-0.3.1-rc5
+    * gcc-3.x fixes.
+    * finding the boundary transactions fixes.
+    * a lot of changes in gauge.
+    * renamed all progs sources in simple ones.
+
+2002-01-07 Yury Umanets <torque@ukrpost.net>
+    * released progsreiserfs 0.3.1-rc4
+    * a lot of cleanups in all sources.
+
+2002-30-06 Yury Umanets <torque@ukrpost.net>
+    * rewrote dal.c and file.c
+    * file_dal.* renamed to file.*
+    * fixed dal for 64-bit platforms
+    * fixed debug/detect script for detecting reiserfs 4.0
+    * rewrote bitmap.c and bitmap.h
+
+2002-27-05 Yury Umanets <torque@ukrpost.net>
+    * added memory allocation handlers. It is useful for using libreiserfs with bootloaders.
+    * fixed creating of the distribution by make dist command
+    * minor fixes in po/*
+    * minor fixes in debug/*
+
+2002-26-05 Yury Umanets <torque@ukrpost.net>
+    * released progsreiserfs 0.3.1-rc3
+    * fixed bug in reiserfs_fs_super_open.
+    * fixed memory leak in reiserfs_fs_super_probe.
+    * some cleanups.
+
+2002-24-05 Yury Umanets <torque@ukrpost.net>
+    * fixed bug with parsing file's and dir's path's with '0' character.
+    * added default_gauge_handler; added libreiserfs_gauge_create_default function.
+
+2002-17-05 Yury Umanets <torque@ukrpost.net>
+    * added reiserfs_fs_host_dal function
+
+2002-14-05 Yury Umanets <torque@ukrpost.net>
+    * removed stored dal length from dal struct, removed dal_realize function.
+    * added rereading the superblock from journal in reiserfs_fs_open.
+    * renamed dal_create and dal_free to dal_open and dal_close.
+    * removed dal_dev since it was a double call to dal_stat.
+    * doc/changed libreiserfs.8
+
+2002-13-05 Yury Umanets <torque@ukrpost.net>
+    * doc/API renamed to libreiserfs.8 manual
+    * changed libreiserfs.8 (added full description for libdal)
+    * add reiserfs_fs_read function, that finds given block inside the journal
+      first, then reads it froms disk if it wasn't found inside journal.
+
+2002-11-05 Yury Umanets <torque@ukrpost.net>
+    * getting bounding transactions and cashe init now work through reiserfs_jr_pipe
+      function
+    * small changes in bitmap.c
+    * added reiserfs_jr_pipe function (standard way to replay the journal)
+    * added check for invalid replay offset in the journal
+    * journal fixes
+    * added reiserfs_jr_read function (finds given block inside the journal)
+
+2002-09-05 Yury Umanets <torque@ukrpost.net>
+    * added reiserfs_journal_t (wrapper for journal header, journal_dal, etc)
+    * updated all sources due to journal struct changes
+
+2002-09-05 Yury Umanets <torque@ukrpost.net>
+    * some fixes for sparcv9
+    * added node.h
+    * reiserfs_block_head_t renamed to reiserfs_node_head_t
+
+2002-08-05 Yury Umanets <torque@ukrpost.net>
+    * released progsreiserfs-0.3.1-rc1	
+    * added reiserfs_fs_resize_dumb and reiserfs_fs_resize_smart functions
+    * added reiserfs_fs_journal_area function
+    * a lot of changes in progsreiserfs/libprogs/tools.c
+    * changed resizefs.reiserfs.c due to be able resize with start and end params
+
+2002-07-05 Yury Umanets <torque@ukrpost.net>
+    * added "dirty" flag into block struct (useful for relocations optiomization)
+    * added offset field into reiserfs_tree_t struct (it allows tree traversing and lookup
+      on tree that lies on resized from start partition)
+    * added callback function into reiserfs_geom_fill and reiserfs_geom_move functions
+    * the all callback routines moved into separate callback.c file
+    * added reiserfs_geom_move function (the working hourse for any dumb block relocations)
+    * rewrote bitmap flushing and fetching (by now this operation work as small plugin
+      functions and all bitmap loops used function reiserfs_bm_pipe)
+
+2002-06-05 Yury Umanets <torque@ukrpost.net>
+    * added smart bitmap resizing which looks like resize(reiserfs_bitmap_t *bm,
+      long start, long end), due to filesystem smart resizing.
+      Thanks to Andrew Clausen.
+     
+2002-05-05 Yury Umanets <torque@ukrpost.net>
+    * released progsreiserfs-0.3.0.3
+    * added test for correct lookup
+    * correct key forming (by now, for any lookups keys are formed in corresponding to
+      filesystem version)
+    * progs cleanups
+    * solaris warning fixed in mkfs.reiserfs.c
+    * journal code cleanups
+    * fixed getting of the boundary transactions 
+    * some changes in file dal
+    * fixed dal_dev
+
+2002-03-05 Yury Umanets <torque@ukrpost.net>
+    * a lot of changes inside the all sources 
+      (changes were make due to new abstraction levels paradigm)
+    * added reiserfs_fs_open_fast (opening without bitmap)
+    * changed some manuals
+    * the all filesystem's structures moved into filesystem.h
+    * changes inside demos/lookup.c
+    * added reiserfs_block_realloc function
+    * added reiserfs_geom_fill function
+    * added reiserfs_fs_state_update function
+    * dal added into reiserfs_block_t struct
+    * added check whether system is linux in mkfs_get_recomended_format
+    * some improvements in regression tests (by now any error specified more exactly)
+
+2002-30-04 Yury Umanets <torque@ukrpost.net>
+    * released progsreiserfs-0.3.0.2
+    * some code cleanups
+    * ported to sparc-sun-solaris2.x by Alexander Zhukov <szhukov@priocom.com>
+
+2002-28-04 Yury Umanets <torque@ukrpost.net>
+    * released progsreiserfs-0.3.0.1
+    * fixed progsreiserfs.spen.in
+    * fixed dal_write
+    * fixed libreiserfs/Makefile.am (top_srcdir changed on top_builddir)
+    * fixed warning in reiserfs_super_open
+    * fixed checking for failures in regression tests
+    
+2002-21-04 Yury Umanets <torque@ukrpost.net>
+    * released progsreiserfs-0.3.0
+    * changes in regression tests
+    * fixed regression tests for tuning
+
+2002-20-04 Yury Umanets <torque@ukrpost.net>
+    * fixed tunning of filesystems with non-4096 blocksize
+
+2002-19-04 Yury Umanets <torque@ukrpost.net>
+    * released progsreiserfs-0.3.0-rc4
+    * some small fixes in filesystem util functions
+    * added reiserfs_fs_journal_kind and reiserfs_fs_journal_kind_str
+    * added checking for journal location parameters mismatch in tunefs.reiserfs.c
+    * fixed reiserfs_fs_journal_relocated for loop device
+    * fixed reiserfs_jr_open (filesystem and with relocated journal, 
+      both on loop device)
+    * added reiserfs_path_empty function
+
+2002-18-04 Yury Umanets <torque@ukrpost.net>
+    * released progsreiserfs-0.3.0-rc3
+    * fixed tests running from non debug directory
+    * added tests for dir functions
+    * added check for creating fs with relocated journal in tests
+    * added check whether progsreiserfs was compiled before running any tests
+
+2002-18-04 Yury Umanets <torque@ukrpost.net>
+    * released progsreiserfs-0.3.0-rc2
+    * added reiserfs.8 manual
+
+2002-17-04 Yury Umanets <torque@ukrpost.net>
+    * speedup dir seeking
+    * some dir and file code optimization
+    * added advanced dir backward seeking (without reseting at the begin of the dir)
+    * fixed bitmap fetching
+    * added reiserfs_path_last_item function
+    * rewrote dir.c
+    * some optimizations in bitmap.c
+    * added reiserfs_block_reading_failed and reiserfs_block_writing_failed
+      macroses
+    * added libreiserfs_calloc function
+    * the all sources changed due to libreiserfs_calloc
+    * reiserfs_block_alloc changed
+    * fixed small bug with gauge in traverse.c
+    * removed checking for __u*.
+    * all references to __u*, __u*, __u* changed by uint*_t
+
+2002-16-04 Yury Umanets <torque@ukrpost.net>
+    * released progsreiserfs-0.3.0-rc1
+    * added reiserfs_fs_clobber_skiped function
+    * added checking for SPARC in reiserfs_fs_clobber_skiped
+    * added mkfs.reiserfs.8 manual
+    * added resizefs.reiserfs.8 manual
+    * added cpfs.reiserfs.8 manual
+    * added tunefsreiserfs.8 manual
+    * fixed small bugs in *_print_usage
+
+2002-15-04 Yury Umanets <torque@ukrpost.net>
+    * released progsreiserfs-0.3.0-pre10
+    * added max and min interface version definition
+    * fixed seeking at file->size - 1
+    * added seeking inside given file in demos/cat.c
+
+2002-14-04 Yury Umanets <torque@ukrpost.net>
+    * released progsreiserfs-0.3.0-pre9
+    * added test for resizing on empty fs
+    * added interface version definition
+    * small changes in gauge.c
+    * added libprogs_gauge.h in noinst_HEADERS
+
+2002-12-04 Yury Umanets <torque@ukrpost.net>
+    * fixed small resizing bug on empty fs in geom.c
+
+2002-12-04 Yury Umanets <torque@ukrpost.net>
+    * realeased progsreiserfs-0.3.0-pre8
+    * minor fixes in gauge.c
+    * some changes in exception.c
+
+2002-11-04 Yury Umanets <torque@ukrpost.net>
+    * released progsreiserfs-0.3.0-pre7
+    * minor changes in demos
+
+2002-10-04 Yury Umanets <torque@ukrpost.net>
+    * changes in gauge.c
+    * added reiserfs_geom_length function
+    * added debug/detect - a script for reiserfs detecting
+    * some changes in gauge.c (changes made in __gauge_handler function)
+
+2002-09-04 Yury Umanets <torque@ukrpost.net>
+    * released progsreiserfs-0.3.0-pre6
+    * fixed segfault in reiserfs_dir_read on emtry dirs
+    * minor changes in geom.c
+    * changes in gauge.c
+    * some changes in regression tests.
+    * removing any exceptions in reiserfs_fs_probe, just yes or no.
+    * some changes in tools.c
+
+2002-08-04 Yury Umanets <torque@ukrpost.net>
+    * released progsreiserfs-0.3.0-pre5
+    * minor changes in reiserfs_fs_open
+    * added force option in resizefs.reiserfs. Resize to minimum possible or maximum
+      possible size.
+    * added reiserfs_fs_min_size function
+    * reiserfs_fs_probe changed (setting up default block size before probing)
+    * fixed some bugs in relocation code.
+    * some changes in doc/API.
+    * some changes in regression tests (added checks for working with 
+      non 4096 block sizes).
+
+2002-07-04 Yury Umanets <torque@ukrpost.net>
+    * released progsreiserfs-0.3.0-pre4
+    * fixed bug with different block sizes for src and dst devices in cpfs.reiserfs.c
+    * added check whether source and destination device blocks sizes are equal.
+    * added reiserfs_block_location and reiserfs_block_set_location.
+    * fixed dal_set_block_size function
+    * fixed opening filesystem with non 4096 block size in
+      reiserfs_fs_super_open_check, reiserfs_fs_super_open, reiserfs_fs_probe functions
+    * fixed st_blocks for non 4096 block size filesystems
+    * added check whether given block size if power of two in mkfs.reiserfs.c
+    * fixed bug with incorrect journal start for block size non 4096
+    * fixed default journals size for 1024 block size in journal.c
+    * fixed non 4096 block size filesystem creation bug.
+    * fixed mkfs.reiserfs to solve bug with default journal size for block size 1024
+    * added all-static and part-static options un configure.in
+    * fixed small memory leak in reiserfs_fs_copy
+    * rewrited geometry and relocation functions.
+
+2002-06-04 Yury Umanets <torque@ukrpost.net>
+    * released progsreiserfs-0.3.0-pre3
+    * added check whether blocksize is power of two in dal.c
+    * added workaround for "empty" indirect item 
+      (indirect item with zeroed unformated nodes pointers)
+    * fully rewrited file access functions.
+    * fixed reiserfs_file_direct_read and reiserfs_file_seek 
+      (a bug with consequensed direct items). Object looks like
+      stat_data + direct item + direct item...
+
+2002-04-04 Yury Umanets <torque@ukrpost.net>
+    * released progsreiserfs-0.3.0-pre2
+    * added checks for out of bonding for bitmap
+    * fixed test for overlaping in geom.c
+    * fixed shirnking
+    * added dal_realize function to solve a bug with resizing.
+      Found in correspondig to become as GNU Parted reiserfs backend.
+
+2002-03-04 Yury Umanets <torque@ukrpost.net>
+    * released progsreiserfs-0.3.0-pre1
+    * fixed gauge (by now all gauge descriptions print inside a handler).
+    * changes in dal.  
+
+2002-02-04 Yury Umanets <torque@ukrpost.net>
+    * added file_dal_reopen function
+    * fixed po/POTFILES.in
+    * added check for uuid and label when reiserfs 3.5 selected in mkfs.reiserfs.c
+    * some uuid ckecks added
+
+2002-01-04 Yury Umanets <torque@ukrpost.net>
+    * added some API documentation.
+    * minor fixes in regression tests
+    * minor fixes in tunefs.reiserfs.c
+    * made checking for filesystem version when updating label and uuid 
+      for reiserfs 3.5 called.
+    * marking super as dirty after updating label and uuid fixed.
+    * fixed uuid and label retriving for reiserfs 3.5. For now functions
+      reiserfs_fs_label and reiserfs_fs_uuid return NULL for reiserfs 3.5
+    * fixed uuid and label updating for reiserfs 3.5
+    * minor fixes in tunefs.reiserfs.c
+
+2002-31-03 Yury Umanets <torque@ukrpost.net>
+    * added some API manual in doc/API
+    * minor changes in configure.in
+    * minor changes in regression tests
+
+2002-30-03 Yury Umanets <torque@ukrpost.net>
+    * fixed some regression tests
+    * fixed reiserfs_fs_super_open
+    * added reiserfs_fs_probe function
+    * reiserfs_fs_destroy receives dal_t instead reiserfs_fs_t
+2002-29-03 Yury Umanets <torque@ukrpost.net>
+    * added debug directory with with some regression tests
+    * added quiet option to cpfs.reiserfs.c
+    * added quiet option to tunefs.reiserfs.c
+    * added quiet option to resizefs.reiserfs.c
+    * added quiet option to mkfs.reiserfs.c
+    * added check for uuid library in mkfs.reiserfs.c
+
+2002-26-03 Yury Umanets <torque@ukrpost.net>
+    * added ability to follow relative paths in reiserfs_object_create
+      by adding current working dir to given name.
+    * added ability to follow links in file access API
+    * some changes in file and dir API
+    * added ls demo program
+    * added cat demo program
+    * file access functions done
+    * added dal_dev function
+
+2002-25-03 Yury Umanets <torque@ukrpost.net>
+    * minor changes in dir.c
+    * added file access functions (reisetrfs_file_open, reiserfs_file_read, etc)
+
+2002-23-03 Yury Umanets <torque@ukrpost.net>
+    * fixed reiserfs_dir_find_key.
+    * major changes in all macroses
+    * added reiserfs_dir_find_key function
+    * added reiserfs_file_open and reiserfs_file_close functions
+    * fixed reiserfs_dir_fill_entry
+
+2002-22-03 Yury Umanets <torque@ukrpost.net>
+    * added demos/dir.c
+    * added reiserfs_dir_entry_hidden function
+    * fixed reiserfs_dir_open for opening pathes ended with some link
+    * fixed reiserfs_tree_lookup_node
+    * fixed reiserfs_dir_read
+    * added key forming functions
+
+2002-21-03 Yury Umanets <torque@ukrpost.net>
+    * fixed reiserfs_dir_rewind
+
+2002-20-03 Yury Umanets <torque@ukrpost.net>
+    * added key form functions
+    * added ability to lookup for something by key type and key offset
+      in demos/lookup.c
+    * added reiserfs_dir_tell
+    * added reiserfs_dir_seek
+    * added reiserfs_dir_rewind
+    * fixed hash generation bug (when name equals "." or "..")
+    * changes in reiserfs_tree_lookup_leaf and reiserfs_tree_lookup_leaf
+    * fixed one endianess code bug (thanks parted-bug list)
+    * added reiserfs_dir_close
+    * added reiserfs_dir_read
+    * added ability to follow relative paths and links by reiserfs_dir_open
+    * minor changes in dal.c (device len is stored for future using)
+
+2002-18-03 Yury Umanets <torque@ukrpost.net>
+    * added reiserfs_dir_open
+
+2002-17-03 Yury Umanets <torque@ukrpost.net>
+    * initial dir access API
+
+2002-16-03 Yury Umanets <torque@ukrpost.net>
+    * added reiserfs_path_remove and reiserfs_path_clear
+
+2002-14-03 Yury Umanets <torque@ukrpost.net>
+    * reiserfs_tree_create creates root node of thee
+    * fixing minor bugs in path.c
+
+2002-14-03 Yury Umanets <torque@ukrpost.net>
+    * 0.2.0 released
+    * reiserfs_tree_node_split added.
+    * all path related functions now in path.c
+
+2002-13-03 Yury Umanets <torque@ukrpost.net>
+    * fixed UNDETRMINED gauge.
+
+2002-11-03 Yury Umanets <torque@ukrpost.net>
+    * added undetermined gauge.
+    * done reiserfs tree insert functions.
+    * added lookup program into demos.
+    * changes in reiserfs_tree_lookup_node.
+    * added reiserfs_tree_lookup_leaf and reiserfs_tree_lookup_internal.
+
+2002-09-03 Yury Umanets <torque@ukrpost.net>
+    * libprogsreiserfs renamed to libprogs.
+
+2002-06-03 Yury Umanets <torque@ukrpost.net>
+    * added reiserfs_tree_lookup_leaf and reiserfs_tree_lookup_internal.
+    * rewriten reiserfs_tree_node_lookup.
+    * std_dal_* renamed to file_dal_*
+
+2002-05-03 Yury Umanets <torque@ukrpost.net>
+    * fixed reiserfs_tree_lookup.
+    * fixed overflow bug on big devices in device abstraction layer.
+
+2002-04-03 Yury Umanets <torque@ukrpost.net>
+    * created __make_empty_direntry and __make_empty_dir
+    * rewrote reiserfs_fs_create
+    * all relocation functions were put into geom.c
+    * removed ENABLE_DEFRAG.
+    * fixed traversing.
+    * rewrote bitmap functions.
+
+2002-01-03 Yury Umanets <torque@ukrpost.net>
+    * ckfs.reiserfs renamed to fsck.reiserfs.
+    * __relocate function added.
+    * geom API added (test_overlap, test_inside)
+
+2002-28-02 Yury Umanets <torque@ukrpost.net>
+    * traverse programm added to demos.
+    * moving occupied standard journal area when tuning from relocated to standard
+      and filesystem was originaly created with relocated journal.
+    * added src_geom and dst_geom to relocation descriptor.
+    * added relocation descriptor.
+    * added demos directory.
+    * dal_compare renamed to dal_equals
+
+2002-27-02 Yury Umanets <torque@ukrpost.net>
+    * object.c and object.h created for object map functions.
+    * key compare functions moved to keys.c
+    * head changes in all source files.
+    * fixed creating without label.
+    * moving and resizing ported to be work on tree traversing algorithm.
+    * advanced tree traversing added.
+
+2002-26-02 Yury Umanets <torque@ukrpost.net>
+    * reiserfs_tree_traverse implemented.
+    * reiserfs_tree_lookup implemented.
+    * initial resierfs_tree_* API created.
+    * minor changes in reiserfs_make_empty_root function.
+
+2002-25-02 Yury Umanets <torque@ukrpost.net>
+    * README.NAMESYS renamed to COPYING.NAMESYS.
+    * struct block_head renamed to reiserfs_block_head_t
+    * updated filesystem.h due to new name of the block_head.
+
+2002-23-02 Yury Umanets <torque@ukrpost.net>
+    * initial tree.c and tree.h - an implemenmtation of the reiserfs B*tree.
+    * minor chamges in dal library.
+    * minor changes in reiserfs_block_move_formated function.
+    * minor changes in reiserfs_make_empty_root function.
+
+2002-22-02 Yury Umanets <torque@ukrpost.net>
+    * struct reiserfs_blk_head_t renamed to reiserfs_block_head_t due tonew "dal" API.
+    * link to uuid library is optional.
+    * added link to uuid library for uuid generation purpose.
+    * added label to mkfs.reiserfs and tunefs.reiserfs
+    * added uuid to mkfs.reiserfs and tunefs.reiserfs
+
+2002-21-02 Yury Umanets <torque@ukrpost.net>
+    * updated the all sources corresponding to new "dal" API.
+    * device abstraction layer in separate library.
+
+2002-20-02 Yury Umanets <torque@ukrpost.net>
+    * released 0.1.7
+    * frontends compilling bug fixed.
+    * libreiserfs.h renamed to reiserfs.h
+    * fixed include/reiserfs/Makefile.am
+    * fixed libreiserfs.h
+
+2002-19-02 Yury Umanets <torque@ukrpost.net>
+    * i18n subsystem initializing fixed.
+    * ckfs.reiserfs skeleton created.
+    * updated libreiserfs.h
+    * updated all progs.
+    * updated README.in
+    * updated Makefile.am
+    * struct buffer_head renamed to reiserfs_blk_head_t.
+    * all sources has updated corresponding to new reiserfs_da_t structure.
+
+2002-18-02 Yury Umanets <torque@ukrpost.net>
+    * reiserfs_da_set_block_size, reiserfs_da_get_block_size functions added.
+    * block_size added to reiserfs_da_t structure.
+    * Initial ckfs.reiserfs added.
+    * Removed getopt.c getopt.h from the all progs.
+    * Changed README file.
+    * Added THANKS file.
+    * Fixed progsreiserfs.spec file.
+    * Added correct coptright information inside of everyone source file.
+    * Added README.NAMESYS file.
+    * All functions inside tools.c renamed corresponding to tools_* rule.
+
+2002-17-02 Yury Umanets <torque@ukrpost.net>
+    * All sources renamed corresponding to simple naming scheme 
+      (without reiserfs_ part).
+
+2002-16-02 Yury Umanets <torque@ukrpost.net>
+    * released 0.1.6
+    * include/libreiserfs renamed to include/reiserfs
+    * reiserfs_da_* API added.
+    * Updated all device abstraction calls.
+
+2002-15-02 Yury Umanets <torque@ukrpost.net>
+    * Warning message before any actions added in tunefs.reiserfs and 
+      resizefs.reiserfs
+    * reiserfs_fs_super_destroy renamed to reiserfs_fs_destroy.
+    * reiserfs_fs_super_open_check function added.
+    * Some minor fixes in all progs.
+    * Updating ru.po and uk.po.
+    * Invalid jr_dev for journal on host device fixed.
+    * Gauge name added to gauge handler.
+    * libprogrsreiserfs_str2long fixed.
+
+2002-14-02 Yury Umanets <torque@ukrpost.net>
+    * Checking for stupid user input in all progs added.
+    * reiserfs_fs_craete_check function added.
+    * reiserfs_fs_journal_tune_check function added.
+    * reiserfs_jr_params_create changed to reiserfs_jr_params_update.
+
+2002-13-02 Yury Umanets <torque@ukrpost.net>
+    * Some journal changes (reiserfs_jr_params_update).
+    * reiserfs_fs_journal_offset added to reiserfs_fs.h
+    * A lot of journal tuning bugs fixed.
+    * Journal parameters check in reiserfs_fs_journal_tune function added.
+    * Journal tunning without journal switching fixed.
+    * Minor fixes in cpfs.reiserfs, resizefs.reiserfs, tunefs.reiserfs
+    * Percentage to all long operation was added.
+    * Checking filesystem for consistence when opening
+    * uk.po added.
+    * Error message added, when journal size too big in mkfs.reiserfs.
+    * Gauge added.
+    * Journal tunning fixed.
+    * Checking journal parameters fixed.
+    * ru.po updated.
+    * progsreiserfs.spec.in fixed
+    * Check for journal parametrs added
+    * Key functions now are in separate file reiserfs_keys.c
+    * Usage message in all progs fixed
+    * Checking for non-replayed transactions in old journal 
+      (when journal tunning) added.
+    * Some transaction working functions added
+    * Checking for NEED_TUNE flag added
+
+2002-10-02 Yury Umanets <torque@ukrpost.net>
+    * 0.1.5 released
+    * tunefs.reiserfs added.
+    * __flags function added to device abstration layer
+    * Some fixes in common device abstraction layer implementation
+      (__read, __write, __sync).
+    * reiserfs_fs_journal_tune added.
+    * Some relocated journal fixes.
+    * Added high level journal API.
+    * Added high level bitmap API.
+    * Added high level API for super.
+    * Updated ru.po.
+    * Uniformed error and warning messages.
+    * Creation flags added to device abstraction handler create function.
+    * reiserfs_fs_journal_setup added. Used for tune journal.
+    * Advanced filesystem size selection (using K, M, G letter after size) added.
+    * Fixed reiserfs_fs_open for relocated journal
+    * Added option --no-journal-available in cpfs.reiserfs and resizefs.reiserfs
+    * Advanced usage message added.
+    
+2002-04-02 Yury Umanets <torque@ukrpost.net>
+    * 0.1.4 released
+    * Hash function added.
+    * reiserfs_hash_value function added.
+    * reiserfs_hash_func function added.
+    * reiserfs_hashes.c added.
+    * Some keys fixes.
+
+2002-03-02 Yury Umanets <torque@ukrpost.net>
+    * 0.1.3 released
+    * Added ru.po.
+    * Some fixes in generic code.
+    * Some journal fixes (memory leak).
+    * Some cleanups (progsreiserfs.spec.in, configure.in, progsreiserfs.m4.in).
+
+2002-01-02 Yury Umanets <torque@ukrpost.net>
+    * 0.1.2 released
+    * API for working with journal added.
+    * Some journal fixes.
+    * Added resizefs.reiserfs.
+
+2002-31-01 Yury Umanets <torque@ukrpost.net>
+    * 0.1.1 released
+    * Relocated journal added.
+    * Support for reiserfs 3.5 added.
+    * Some filesystem API updates.
+    * Added cpfs.reiserfs program.
+    * Some bitmap optimizations.
+
+2002-20-01 Yury Umanets <torque@ukrpost.net>
+    * 0.1.0 released
+    * Resize (shrinking and growing) filesystem.
+    * Copying filesystem.
+    * Creating new reiserfs 3.6 filesystem.
+    * Added mkfs.reiserfs program.
+

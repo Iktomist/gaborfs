@@ -1,0 +1,87 @@
+.\"						Hey, EMACS: -*- nroff -*-
+.\" First parameter, NAME, should be all caps
+.\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+.\" other parameters are allowed: see man(7), man(1)
+.TH tunefs.reiserfs 8 "16 Apr, 2002" progsreiserfs "progsreiserfs manual"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+tunefs.reiserfs \- a reiserfs filesystem tuning program.
+.SH SYNOPSIS
+.B tunefs.reiserfs
+options device
+.SH DESCRIPTION
+.B resizefs.reiserfs
+is a reiserfs filesystem tuning program. It changes journal parameters, journal device, 
+label and uuid.
+.SH OPTIONS
+.TP
+.B -v, --version
+displays current version
+.TP
+.B -u, --usage
+displays program usage
+.TP
+.B -j FILE, --journal-device=FILE
+device where journal is lies. Needed to perform journal replaying (when journal params
+will be changed) to make sure that no non-replayed transactions found.
+.TP
+.B -d FILE, --journal-new-device=FILE
+new journal device. If you are trying to change journal from relocated device to the 
+host device (new journal device the same as host device), then program will be looking 
+for available space on host device. If free space on the host device enought to put 
+journal on them, journal will be switched onto host device. If the area for journal on
+the host occupied by reiserfs tree (this possible if filesystem was created with journal
+on separated device), relocation of data blocks from this area onto free blocks will 
+be performed.
+.TP
+.B -s N, --journal-size=N
+journal size. This is the journal size. For journal on host device it must be gretter
+than 512 blocks and lesser than count of blocks described by first bitmap block. In 
+other words, journal must be lesser or equals block_size * 8 journal offset - 1.
+In the case given journal size not equals previous journal size tunefs.reiserfs will
+perform journal resizing. For relocated journal it will be recreated with new params.
+And for standard journal data blocks will be relocated first, then journal will be recreated 
+with new boundaries. 
+
+And for journal on separated device journal size may be as big as device length - 
+journal offset - 1.
+.TP
+.B -o N, --journal-offset=N
+journal offset for relocated journal. You can't to change journal offset for standard journal.
+.TP
+.B -t N, --transaction-max-size=N
+transaction max size
+.TP
+.B -n, --no-journal-available
+no journal available now. This options lets program know, that no journal available
+by now. Therefore no journal replaying will be performed.
+.TP
+.B -l LABEL, --label=LABEL
+sets volume label
+.TP
+.B -i UUID, --uuid=UUID
+sets given uuid to superblock
+.TP
+.B -q, --quiet
+non-interactive mode
+.RS
+.SH REPORTING BUGS
+Report bugs to <torque@ukrpost.net>
+.SH SEE ALSO
+.BR mkfs.reiserfs (8),
+.BR resizefs.reiserfs (8),
+.BR cpfs.reiserfs (8)
+.SH AUTHOR
+This manual page was written by Yury Umanets <torque@ukrpost.net>
+

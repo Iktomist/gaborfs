@@ -1,0 +1,136 @@
+#
+#    reiserfs testing helper functions
+#    Copyright (C) 2001, 2002 Yury Umanets <torque@ukrpost.net>, see COPYING for 
+#    licensing and copyright details.
+#
+
+tests_home="$(dirname $0)"
+failures=""
+
+
+failure() {
+    failures="$failures$*\n"
+}
+
+action() {
+    operation=$1
+    echo -n "$operation..."
+    shift
+    $* > /dev/null 2>&1
+    result=$?
+    
+    if [ $result -eq 0 ]; then
+	echo "done"
+    else
+	echo "failed"
+    fi
+    
+    return $result
+}
+
+check() {
+    result=0
+
+    [ "$(uname)" = "SunOS" ] && return $result
+    [ "$(uname)" = "FreeBSD" ] && return $result
+    
+    if [ ! -x /sbin/reiserfsck ]; then
+	echo "Couldn't find /sbin/reiserfsck"
+	result=1
+    fi
+    
+    echo -n "Checking filesystem..."
+    echo "Yes" | /sbin/reiserfsck $* > /dev/null 2>&1 && echo "done" || {
+        echo "failed"
+        result=1
+    }
+    
+    return $result
+}
+
+test_mkfs() {
+    action "Creating reiserfs with params ($*)" \
+        $tests_home/../progsreiserfs/mkfs/mkfs.reiserfs -q $*
+    
+    return $?
+}
+
+test_resizefs() {
+    action "Resizing filesystem with params ($*)" \
+	$tests_home/../progsreiserfs/resizefs/resizefs.reiserfs -q $*
+    
+    return $?
+}
+
+test_cpfs() {
+    action "Copying filesystem with params ($*)" \
+	$tests_home/../progsreiserfs/cpfs/cpfs.reiserfs -q $*
+    
+    return $?
+}
+
+check_label() {
+    loop=$1
+    label=$2
+
+    [ ! -x /bin/dd ] && {
+	echo "Couldn't find /bin/dd program"
+	return 1
+    }	
+
+    label_from_super=$(/bin/dd if=$loop skip=65636 bs=1 count=16 2> /dev/null && echo)
+    if [ "$label" = "$label_from_super" ]; then
+        return 0
+    else	
+        return 1
+    fi
+    
+    return $?
+}
+
+test_label() {
+    action "Tunning filesystem with params ($*)" \ 
+	$tests_home/../progsreiserfs/tunefs/tunefs.reiserfs -q $* > /dev/null 2>&1
+}
+
+test_ls() {
+    loop=$1
+    dir=$2
+    right=$3
+    
+    count=$($tests_home/../demos/ls $loop $dir | wc -l)
+    [ $count -ne $right ] && return 1
+    
+    return 0
+}
+
+test_seek() {
+    loop=$1
+    dir=$2
+    seek=$3
+    right=$4
+    
+    count=$($tests_home/../demos/ls $loop $dir $seek | wc -l)
+    [ $count -ne $right ] && return 1
+    
+    return 0
+}
+
+test_dir() {
+    loop=$1
+    action "Reading root directory on $loop" test_ls $loop / 2
+    action "Seeking by 1 in root directory on $loop" test_seek $loop / 1 1
+    action "Seeking by 2 in root directory on $loop" test_seek $loop / 2 0
+}
+
+test_tunefs() {
+    action "Tuning filesystem with params ($*)" \
+		$tests_home/../progsreiserfs/tunefs/tunefs.reiserfs -q $*
+    return $?
+}
+
+test_lookup() {
+    action "Looking up for root leaf" \
+	$tests_home/../demos/lookup $*
+    return $?	
+}

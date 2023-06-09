@@ -1,0 +1,9 @@
+* Files and directories access functions.
+* Advanced tunning (moving area occupied by tree to place the journal on it, 
+  journal resizing, etc)
+* Demos (files and directory access, tree traversing and lookup)
+* Regression tests
+* Support for uuid and label
+* Support for all blocksize values
+* Support for sparc-sun-solaris2.x platform
+* Smart resizing (by start and end)

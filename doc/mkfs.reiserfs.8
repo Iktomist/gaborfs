@@ -1,0 +1,74 @@
+.\"						Hey, EMACS: -*- nroff -*-
+.\" First parameter, NAME, should be all caps
+.\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+.\" other parameters are allowed: see man(7), man(1)
+.TH mkfs.reiserfs 8 "16 Apr, 2002" progsreiserfs "progsreiserfs manual"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+mkfs.reiserfs \- a reiserfs filesystem creation program.
+.SH SYNOPSIS
+.B mkfs.reiserfs
+[ options ] device [ size[K|M|G] ]
+.SH DESCRIPTION
+.B mkfs.reiserfs
+is a reiserfs filesystem creation program. It supports reiserfs 3.5, 
+reiserfs 3.6, with standard and relocated journal.
+.SH OPTIONS
+.TP
+.B -v, --version
+dispays current version
+.TP
+.B -u, --usage
+displays program usage
+.TP
+.B -s N, --journal-size=N
+journal size
+.TP
+.B -o N, --journal-offset=N
+journal offset for relocated journal
+.TP
+.B -t N, --transaction-max-size=N
+maximal transaction size
+.TP
+.B -b N, --block-size=N
+block size (1024, 2048, 4096...)
+.TP
+.B -f FORMAT, --format=FORMAT
+reiserfs version (3.5 or 3.6)
+.TP
+.B -h HASH, --hash=HASH
+hash function (tea, yura or r5)
+.TP
+.B -j FILE, --journal-device=FILE
+journal device for separated journal. If journal device equals host device,
+then reiserfs with standard journal will be created.
+.TP
+.B -l LABEL, --label=LABEL
+volume label
+.TP
+.B -d UUID, --uuid=UUID
+sets universally unique identifier
+.TP
+.B -q, --quiet
+non-interactive mode
+.RS
+.SH REPORTING BUGS
+Report bugs to <torque@ukrpost.net>
+.SH SEE ALSO
+.BR resizefs.reiserfs (8),
+.BR tunefs.reiserfs (8),
+.BR cpfs.reiserfs (8)
+.SH AUTHOR
+This manual page was written by Yury Umanets <torque@ukrpost.net>
+

@@ -1,0 +1,737 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR Free Software Foundation, Inc.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"POT-Creation-Date: 2002-12-12 15:38+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: progsreiserfs/mkfs/mkfs.c:37
+msgid "Usage: mkfs.reiserfs [ options ] device [ size[K|M|G] ]\n"
+msgstr ""
+
+#: progsreiserfs/mkfs/mkfs.c:38
+msgid ""
+"Options:\n"
+"  -v | --version                  prints current version\n"
+"  -u | --usage                    prints program usage\n"
+"  -s N | --journal-size=N         journal size\n"
+"  -o N | --journal-offset=N       journal offset for relocated journal\n"
+msgstr ""
+
+#: progsreiserfs/mkfs/mkfs.c:44
+msgid ""
+"  -t N | --transaction-max-size=N maximal transaction size\n"
+"  -b N | --block-size=N           block size (1024, 2048, 4096...)\n"
+"  -f FORMAT | --format=FORMAT     reiserfs version (3.5 or 3.6)\n"
+"  -h HASH | --hash=HASH           hash function (tea, yura or r5)\n"
+"  -j FILE | --journal-device=FILE journal device for separated journal\n"
+msgstr ""
+
+#: progsreiserfs/mkfs/mkfs.c:50
+msgid ""
+"  -l LABEL | --label=LABEL        volume label\n"
+"  -d UUID | --uuid=UUID           sets universally unique identifier\n"
+"  -q | --quiet                    non-interactive mode\n"
+msgstr ""
+
+#: progsreiserfs/mkfs/mkfs.c:112
+#, c-format
+msgid "For kernel %s recomended version of reiserfs is %s, but selected %s."
+msgstr ""
+
+#: progsreiserfs/mkfs/mkfs.c:186
+#, c-format
+msgid "Invalid blocksize (%s)."
+msgstr ""
+
+#: progsreiserfs/mkfs/mkfs.c:191
+#, c-format
+msgid "Invalid blocksize (%s). Must be 1024, 2048..."
+msgstr ""
+
+#: progsreiserfs/mkfs/mkfs.c:196
+msgid "Invalid block size. It must power of two."
+msgstr ""
+
+#: progsreiserfs/mkfs/mkfs.c:204
+#, c-format
+msgid "Invalid hash function (%s)."
+msgstr ""
+
+#: progsreiserfs/mkfs/mkfs.c:212
+msgid "Invalid filesystem format. Use 3.5 or 3.6 please."
+msgstr ""
+
+#: progsreiserfs/cpfs/cpfs.c:76 progsreiserfs/cpfs/cpfs.c:113
+#: progsreiserfs/cpfs/cpfs.c:119 progsreiserfs/fsck/fsck.c:76
+#: progsreiserfs/fsck/fsck.c:101 progsreiserfs/mkfs/mkfs.c:221
+#: progsreiserfs/mkfs/mkfs.c:307 progsreiserfs/resizefs/resizefs.c:100
+#: progsreiserfs/resizefs/resizefs.c:134 progsreiserfs/resizefs/resizefs.c:143
+#: progsreiserfs/tunefs/tunefs.c:103 progsreiserfs/tunefs/tunefs.c:111
+#: progsreiserfs/tunefs/tunefs.c:174
+#, c-format
+msgid "Device %s doesn't exists or invalid."
+msgstr ""
+
+#: progsreiserfs/mkfs/mkfs.c:229 progsreiserfs/tunefs/tunefs.c:119
+#, c-format
+msgid "Invalid journal size (%s)."
+msgstr ""
+
+#: progsreiserfs/mkfs/mkfs.c:237 progsreiserfs/tunefs/tunefs.c:127
+#, c-format
+msgid "Invalid journal offset (%s)."
+msgstr ""
+
+#: progsreiserfs/mkfs/mkfs.c:245 progsreiserfs/tunefs/tunefs.c:135
+#, c-format
+msgid "Invalid transaction max size (%s)."
+msgstr ""
+
+#: progsreiserfs/mkfs/mkfs.c:257 progsreiserfs/tunefs/tunefs.c:143
+#, c-format
+msgid "Invalid uuid (%s)."
+msgstr ""
+
+#: progsreiserfs/mkfs/mkfs.c:299
+#, c-format
+msgid "Invalid filesystem size (%s)."
+msgstr ""
+
+#: progsreiserfs/cpfs/cpfs.c:128 progsreiserfs/cpfs/cpfs.c:165
+#: progsreiserfs/mkfs/mkfs.c:314 progsreiserfs/mkfs/mkfs.c:325
+#: progsreiserfs/resizefs/resizefs.c:152 progsreiserfs/resizefs/resizefs.c:164
+#: progsreiserfs/tunefs/tunefs.c:181 progsreiserfs/tunefs/tunefs.c:193
+#: progsreiserfs/tunefs/tunefs.c:208
+#, c-format
+msgid "Couldn't open device %s. %s."
+msgstr ""
+
+#: progsreiserfs/mkfs/mkfs.c:328
+#, c-format
+msgid " and %s"
+msgstr ""
+
+#: progsreiserfs/mkfs/mkfs.c:339
+#, c-format
+msgid "Filesystem size is too big for device (%lu)."
+msgstr ""
+
+#: progsreiserfs/mkfs/mkfs.c:345
+msgid ""
+"Filesystem with journal on host device has been selected. Parameter journal-"
+"offset will be ignored."
+msgstr ""
+
+#: progsreiserfs/mkfs/mkfs.c:358
+#, c-format
+msgid "Can't allocate journal (%lu - %lu) outside the device (%lu)."
+msgstr ""
+
+#: progsreiserfs/mkfs/mkfs.c:380
+msgid "Sorry, reiserfs 3.5 doesn't supports uuid and label."
+msgstr ""
+
+#: progsreiserfs/cpfs/cpfs.c:171 progsreiserfs/mkfs/mkfs.c:391
+#: progsreiserfs/resizefs/resizefs.c:221 progsreiserfs/tunefs/tunefs.c:245
+msgid "Please select (y/n) "
+msgstr ""
+
+#: progsreiserfs/mkfs/mkfs.c:392
+#, c-format
+msgid "All data on %s%s will be lost. Do you realy want to create %s (y/n) "
+msgstr ""
+
+#: progsreiserfs/mkfs/mkfs.c:400
+#, c-format
+msgid "Creating %s with %s journal on %s%s\n"
+msgstr ""
+
+#: progsreiserfs/mkfs/mkfs.c:401
+msgid "relocated"
+msgstr ""
+
+#: progsreiserfs/mkfs/mkfs.c:402
+msgid "standard"
+msgstr ""
+
+#: progsreiserfs/mkfs/mkfs.c:415
+#, c-format
+msgid "Couldn't create filesystem on %s."
+msgstr ""
+
+#: progsreiserfs/cpfs/cpfs.c:197 progsreiserfs/mkfs/mkfs.c:424
+#: progsreiserfs/resizefs/resizefs.c:251 progsreiserfs/tunefs/tunefs.c:312
+msgid "syncing"
+msgstr ""
+
+#: progsreiserfs/resizefs/resizefs.c:32
+msgid ""
+"Usage: resizefs.reiserfs [ options ] DEV [+|-]size[K|M|G]\n"
+"Usage: resizefs.reiserfs [ options ] FILE start[K|M|G] end[K|M|G]\n"
+"Options:\n"
+"  -v | --version                  prints current version\n"
+"  -u | --usage                    prints program usage\n"
+"  -j FILE | --journal-device=FILE journal device for separated journal\n"
+"  -n | --no-journal-available     no journal device available now\n"
+"  -f | --force                    force resizer to resize partition anyway\n"
+"  -q | --quiet                    non-interactive mode\n"
+msgstr ""
+
+#: progsreiserfs/cpfs/cpfs.c:157 progsreiserfs/resizefs/resizefs.c:174
+#: progsreiserfs/tunefs/tunefs.c:218
+#, c-format
+msgid "Couldn't open reiserfs on device %s."
+msgstr ""
+
+#: progsreiserfs/resizefs/resizefs.c:182
+#, c-format
+msgid "Invalid \"start\" modificator (%s)."
+msgstr ""
+
+#: progsreiserfs/resizefs/resizefs.c:190
+#, c-format
+msgid "Invalid \"end\" modificator (%s)."
+msgstr ""
+
+#: progsreiserfs/resizefs/resizefs.c:199
+#, c-format
+msgid "Invalid filesystem size (%d)."
+msgstr ""
+
+#: progsreiserfs/resizefs/resizefs.c:214
+msgid "Can't resize filesystem outside the device."
+msgstr ""
+
+#: progsreiserfs/resizefs/resizefs.c:222 progsreiserfs/tunefs/tunefs.c:246
+msgid "Are you ready (y/n) "
+msgstr ""
+
+#: progsreiserfs/resizefs/resizefs.c:229
+#, c-format
+msgid "Resizing %s\n"
+msgstr ""
+
+#: progsreiserfs/resizefs/resizefs.c:241
+#, c-format
+msgid "Couldn't resize filesystem on %s to %lu - %lu blocks."
+msgstr ""
+
+#: progsreiserfs/cpfs/cpfs.c:32
+msgid ""
+"Usage: cpfs.reiserfs [ options ] SRC DEST\n"
+"Options:\n"
+"  -v | --version                  prints current version\n"
+"  -u | --usage                    prints program usage\n"
+"  -j FILE | --journal-device=FILE journal device for separated journal\n"
+"  -n | --no-journal-available     no journal device available now\n"
+"  -q | --quiet                    non-interactive mode\n"
+msgstr ""
+
+#: progsreiserfs/cpfs/cpfs.c:106
+msgid "Source and destination devices are equal."
+msgstr ""
+
+#: progsreiserfs/cpfs/cpfs.c:135
+msgid "Source filesystem journal device and destination device are equal."
+msgstr ""
+
+#: progsreiserfs/cpfs/cpfs.c:146
+#, c-format
+msgid "Couldn't open device for source journal %s. %s."
+msgstr ""
+
+#: progsreiserfs/cpfs/cpfs.c:172
+#, c-format
+msgid "All data on %s will be lost. Do you realy want to copy %s to %s (y/n) "
+msgstr ""
+
+#: progsreiserfs/cpfs/cpfs.c:180
+#, c-format
+msgid "Copying %s to %s\n"
+msgstr ""
+
+#: progsreiserfs/cpfs/cpfs.c:190
+#, c-format
+msgid "Couldn't copy %s to %s."
+msgstr ""
+
+#: progsreiserfs/tunefs/tunefs.c:32
+msgid "Usage: tunefs.reiserfs options device\n"
+msgstr ""
+
+#: progsreiserfs/tunefs/tunefs.c:33
+msgid ""
+"Options:\n"
+"  -v | --version                      prints current version\n"
+"  -u | --usage                        prints program usage\n"
+"  -j FILE | --journal-device=FILE     device where journal is lies\n"
+"  -d FILE | --journal-new-device=FILE new journal device\n"
+"  -s N | --journal-size=N             journal size\n"
+"  -o N | --journal-offset=N           journal offset for relocated journal\n"
+"  -t N | --transaction-max-size=N     transaction max size\n"
+"  -n | --no-journal-available         no journal available now\n"
+msgstr ""
+
+#: progsreiserfs/tunefs/tunefs.c:43
+msgid ""
+"  -l LABEL | --label=LABEL            sets volume label\n"
+"  -i UUID | --uuid=UUID               sets given uuid to superblock\n"
+"  -q | --quiet                        non-interactive mode\n"
+msgstr ""
+
+#: progsreiserfs/tunefs/tunefs.c:226
+#, c-format
+msgid ""
+"Invalid journal location parameters detected. Filesystem has %s journal, but "
+"specified %s journal."
+msgstr ""
+
+#: progsreiserfs/tunefs/tunefs.c:239
+msgid "Filesystem doesn't needed tunning."
+msgstr ""
+
+#: progsreiserfs/tunefs/tunefs.c:276
+#, c-format
+msgid "Tunning %s\n"
+msgstr ""
+
+#: progsreiserfs/tunefs/tunefs.c:289
+msgid "Couldn't tune filesystem."
+msgstr ""
+
+#: progsreiserfs/tunefs/tunefs.c:299
+msgid "Sorry, label and uuid not supported for reiserfs 3.5."
+msgstr ""
+
+#: progsreiserfs/fsck/fsck.c:33
+msgid ""
+"Usage: fsck.reiserfs [ options ] device\n"
+"Options:\n"
+"  -v | --version                  prints current version\n"
+"  -u | --usage                    prints program usage\n"
+"  -j FILE | --journal-device=FILE journal device for separated journal\n"
+"  -n | --no-journal-available     no journal device available now\n"
+msgstr ""
+
+#: progsreiserfs/fsck/fsck.c:109
+#, c-format
+msgid "Couldn't open device device %s."
+msgstr ""
+
+#: progsreiserfs/fsck/fsck.c:121
+#, c-format
+msgid "Couldn't open device %s."
+msgstr ""
+
+#: progsreiserfs/fsck/fsck.c:132
+msgid "Sorry, not implemented yet!"
+msgstr ""
+
+#: progsreiserfs/libmisc/tools.c:118
+#, c-format
+msgid "Device %s isn't a block device."
+msgstr ""
+
+#: libreiserfs/exception.c:33
+msgid "Information"
+msgstr ""
+
+#: libreiserfs/exception.c:34
+msgid "Warning"
+msgstr ""
+
+#: libreiserfs/exception.c:35
+msgid "Error"
+msgstr ""
+
+#: libreiserfs/exception.c:36
+msgid "Fatal"
+msgstr ""
+
+#: libreiserfs/exception.c:37
+msgid "Bug"
+msgstr ""
+
+#: libreiserfs/exception.c:41
+msgid "Yes"
+msgstr ""
+
+#: libreiserfs/exception.c:42
+msgid "No"
+msgstr ""
+
+#: libreiserfs/exception.c:43
+msgid "OK"
+msgstr ""
+
+#: libreiserfs/exception.c:44
+msgid "Retry"
+msgstr ""
+
+#: libreiserfs/exception.c:45
+msgid "Ignore"
+msgstr ""
+
+#: libreiserfs/exception.c:46
+msgid "Cancel"
+msgstr ""
+
+#: libreiserfs/exception.c:71
+#, c-format
+msgid ""
+"A bug has been detected in libreiserfs. Please email a bug report to "
+"torque@ukrpost.net containing the version (%s) and the following message: "
+msgstr ""
+
+#: libreiserfs/debug.c:27
+#, c-format
+msgid "Assertion (%s) at %s:%d in function %s() failed."
+msgstr ""
+
+#: libreiserfs/libreiserfs.c:73
+#, c-format
+msgid "Can't allocate %d bytes. Invalid \"malloc\" handler."
+msgstr ""
+
+#: libreiserfs/libreiserfs.c:79 libreiserfs/libreiserfs.c:116
+msgid "Out of memory."
+msgstr ""
+
+#: libreiserfs/libreiserfs.c:109
+#, c-format
+msgid "Can't reallocate given chunk for %d bytes. Invalid \"realloc\" handler."
+msgstr ""
+
+#: libreiserfs/libreiserfs.c:134
+msgid "Can't free given chunk. Invalid \"free\" handler."
+msgstr ""
+
+#: libreiserfs/core.c:31
+msgid ""
+"Bitmap isn't opened. Possible filesystem was opened in the \"fast\" maner."
+msgstr ""
+
+#: libreiserfs/core.c:112
+msgid "Can't change start of the standard journal."
+msgstr ""
+
+#: libreiserfs/core.c:126
+msgid ""
+"There are non-replayed transaction in old journal, check filesystem "
+"consistency first."
+msgstr ""
+
+#: libreiserfs/core.c:159
+#, c-format
+msgid "Not enought free space on host device for %lu blocks of journal."
+msgstr ""
+
+#: libreiserfs/core.c:178
+msgid "relocating occupied area"
+msgstr ""
+
+#: libreiserfs/core.c:319 libreiserfs/core.c:368
+msgid "Journal already opened."
+msgstr ""
+
+#: libreiserfs/core.c:328
+#, c-format
+msgid ""
+"Journal kind mismatch has detected. Filesystem has %s journal, but specified "
+"%s journal."
+msgstr ""
+
+#: libreiserfs/core.c:339
+msgid "Couldn't open journal."
+msgstr ""
+
+#: libreiserfs/core.c:381
+msgid "Couldn't create journal."
+msgstr ""
+
+#: libreiserfs/core.c:421 libreiserfs/core.c:438
+msgid "Journal isn't opened."
+msgstr ""
+
+#: libreiserfs/core.c:534 libreiserfs/core.c:555
+msgid "Bitmap already opened."
+msgstr ""
+
+#: libreiserfs/core.c:541
+msgid "Couldn't open bitmap."
+msgstr ""
+
+#: libreiserfs/core.c:563
+msgid "Couldn't create bitmap."
+msgstr ""
+
+#: libreiserfs/core.c:588
+#, c-format
+msgid "Couldn't resize bitmap to (%lu - %lu) blocks."
+msgstr ""
+
+#: libreiserfs/core.c:669
+#, c-format
+msgid "Journal relocation flags mismatch. Journal device: %x, magic: %s."
+msgstr ""
+
+#: libreiserfs/core.c:676
+#, c-format
+msgid "Superblock has an invalid block count %lu for device length %lu blocks."
+msgstr ""
+
+#: libreiserfs/core.c:695
+#, c-format
+msgid "Reading block %lu for blocksize %d failed. %s."
+msgstr ""
+
+#: libreiserfs/core.c:707
+#, c-format
+msgid "Invalid blocksize %d. It must power of two."
+msgstr ""
+
+#: libreiserfs/core.c:740
+msgid "Superblock already opened."
+msgstr ""
+
+#: libreiserfs/core.c:748
+#, c-format
+msgid "Couldn't reopen superblock from journal. %s."
+msgstr ""
+
+#: libreiserfs/core.c:758
+msgid "Invalid superblock has read from the journal."
+msgstr ""
+
+#: libreiserfs/core.c:808
+msgid "initializing skiped area"
+msgstr ""
+
+#: libreiserfs/core.c:974
+msgid "Can't resize old format filesystem."
+msgstr ""
+
+#: libreiserfs/core.c:982
+msgid "Filesystem isn't in valid state. May be it is not cleanly unmounted."
+msgstr ""
+
+#: libreiserfs/core.c:1009
+msgid "relocating metadata"
+msgstr ""
+
+#: libreiserfs/core.c:1044 libreiserfs/core.c:1167
+msgid "shrinking"
+msgstr ""
+
+#: libreiserfs/core.c:1067
+msgid "New boundaries are the same as previous ones."
+msgstr ""
+
+#: libreiserfs/core.c:1073
+#, c-format
+msgid "Invalid boundaries: start=%ld, end=%ld"
+msgstr ""
+
+#: libreiserfs/core.c:1087 libreiserfs/core.c:1151
+msgid "Can't shrink filesystem. Too many blocks already allocated."
+msgstr ""
+
+#: libreiserfs/core.c:1196 libreiserfs/core.c:1617
+#, c-format
+msgid "Device is too small for (%lu) blocks."
+msgstr ""
+
+#: libreiserfs/core.c:1233
+msgid "New size is the same as previous one."
+msgstr ""
+
+#: libreiserfs/core.c:1246 libreiserfs/core.c:1259
+msgid "Couldn't open reiserfs tree."
+msgstr ""
+
+#: libreiserfs/core.c:1270
+msgid "Tree isn't opened."
+msgstr ""
+
+#: libreiserfs/core.c:1303
+msgid "Filesystem isn't consistent. Couldn't open it for write."
+msgstr ""
+
+#: libreiserfs/core.c:1308
+msgid "Filesystem isn't consistent."
+msgstr ""
+
+#: libreiserfs/core.c:1316
+msgid "Filesystem has journal on separate device, but specified host device."
+msgstr ""
+
+#: libreiserfs/core.c:1330
+msgid "Journal was not opened. Journal tuning is needed."
+msgstr ""
+
+#: libreiserfs/core.c:1412
+#, c-format
+msgid "Block size isn't power of two (%d)."
+msgstr ""
+
+#: libreiserfs/core.c:1418
+#, c-format
+msgid "Block size is too small (%d)."
+msgstr ""
+
+#: libreiserfs/core.c:1424
+#, c-format
+msgid "Block size is too big (%d)."
+msgstr ""
+
+#: libreiserfs/core.c:1430
+#, c-format
+msgid "Invalid filesystem size (%lu)."
+msgstr ""
+
+#: libreiserfs/core.c:1437
+#, c-format
+msgid "Filesystem is too big for device (%lu)."
+msgstr ""
+
+#: libreiserfs/core.c:1446
+#, c-format
+msgid "Size of file system is too small. It must be at least (%lu) blocks."
+msgstr ""
+
+#: libreiserfs/core.c:1487
+msgid "Couldn't create superblock."
+msgstr ""
+
+#: libreiserfs/core.c:1526
+msgid "Couldn't synchronize filesystem."
+msgstr ""
+
+#: libreiserfs/core.c:1600
+#, c-format
+msgid ""
+"Block sizes for source and destination devices are different. Source: %d, "
+"destination: %d."
+msgstr ""
+
+#: libreiserfs/core.c:1608
+msgid "Source filesystem isn't consistent."
+msgstr ""
+
+#: libreiserfs/core.c:1646
+msgid "copying"
+msgstr ""
+
+#: libreiserfs/journal.c:138
+#, c-format
+msgid "Invalid journal start (%lu) for journal on host device."
+msgstr ""
+
+#: libreiserfs/journal.c:147
+#, c-format
+msgid ""
+"Journal size is too big (%lu). It must be smaller or equal %lu blocks for "
+"block size %d."
+msgstr ""
+
+#: libreiserfs/journal.c:154
+#, c-format
+msgid "Journal size (%lu) is smaller minimal recomended (%lu)."
+msgstr ""
+
+#: libreiserfs/journal.c:195
+#, c-format
+msgid "Invalid start (%lu) for journal len %lu."
+msgstr ""
+
+#: libreiserfs/journal.c:297 libreiserfs/journal.c:304
+msgid "Invalid journal parameters detected."
+msgstr ""
+
+#: libreiserfs/journal.c:315
+msgid "Couldn't stat journal device."
+msgstr ""
+
+#: libreiserfs/journal.c:354
+msgid "initializing journal"
+msgstr ""
+
+#: libreiserfs/journal.c:368
+msgid "Can't stat journal device."
+msgstr ""
+
+#: libreiserfs/journal.c:492
+msgid "looking for transactions"
+msgstr ""
+
+#: libreiserfs/key.c:86
+#, c-format
+msgid "Key type (%d) is too big."
+msgstr ""
+
+#: libreiserfs/object.c:219
+#, c-format
+msgid "Couldn't find stat data of object (%lu %lu)."
+msgstr ""
+
+#: libreiserfs/object.c:261
+#, c-format
+msgid "Invalid key type detected %d."
+msgstr ""
+
+#: libreiserfs/object.c:310
+#, c-format
+msgid "Couldn't find stat data of directory %s."
+msgstr ""
+
+#: libreiserfs/object.c:322
+#, c-format
+msgid "%s has invalid object type."
+msgstr ""
+
+#: libreiserfs/object.c:345
+#, c-format
+msgid "Couldn't follow link %s."
+msgstr ""
+
+#: libreiserfs/object.c:375
+#, c-format
+msgid "Couldn't find entry %s."
+msgstr ""
+
+#: libreiserfs/segment.c:66
+#, c-format
+msgid "Couldn't find free block inside allowed area (%lu - %lu)."
+msgstr ""
+
+#: libreiserfs/file.c:35
+msgid "Can't open file for write on read only file system."
+msgstr ""
+
+#: libreiserfs/file.c:49
+#, c-format
+msgid "Sorry, %s isn't a regular file or link to file."
+msgstr ""
+
+#: libreiserfs/file.c:215
+msgid "Couldn't find first file block."
+msgstr ""
+
+#: libreiserfs/dir.c:47
+#, c-format
+msgid "Sorry, %s isn't a directory."
+msgstr ""
+
+#: libreiserfs/dir.c:79
+msgid "Couldn't find first directory block."
+msgstr ""

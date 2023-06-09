@@ -1,0 +1,56 @@
+.\"						Hey, EMACS: -*- nroff -*-
+.\" First parameter, NAME, should be all caps
+.\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+.\" other parameters are allowed: see man(7), man(1)
+.TH resizefs.reiserfs 8 "16 Apr, 2002" progsreiserfs "progsreiserfs manual"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+resizefs.reiserfs \- a reiserfs filesystem resizing program.
+.SH SYNOPSIS
+.B resizefs.reiserfs
+[ options ] device [+|-]size[K|M|G]
+.SH DESCRIPTION
+.B resizefs.reiserfs
+is a reiserfs filesystem shrinking and expanding program.
+.SH OPTIONS
+.TP
+.B -v, --version
+dispays current version
+.TP
+.B -u, --usage
+displays program usage
+.TP
+.B -j FILE, --journal-device=FILE
+journal device for separated journal
+.TP
+.B -n, --no-journal-available
+no journal device available now
+.TP
+.B -f, --force
+force resizer to resize partition anyway. It means either to shrink in minimal 
+possible size if requested size lesser than minimal or to expand in maximal size if
+request size bigger than maximal possible size (device size)
+.TP
+.B -q, --quiet
+non-interactive mode
+.RS
+.SH REPORTING BUGS
+Report bugs to <torque@ukrpost.net>
+.SH SEE ALSO
+.BR mkfs.reiserfs (8),
+.BR tunefs.reiserfs (8),
+.BR cpfs.reiserfs (8)
+.SH AUTHOR
+This manual page was written by Yury Umanets <torque@ukrpost.net>
+

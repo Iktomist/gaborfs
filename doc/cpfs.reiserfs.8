@@ -1,0 +1,56 @@
+.\"						Hey, EMACS: -*- nroff -*-
+.\" First parameter, NAME, should be all caps
+.\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+.\" other parameters are allowed: see man(7), man(1)
+.TH cpfs.reiserfs 8 "16 Apr, 2002" progsreiserfs "progsreiserfs manual"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+cpfs.reiserfs \- a reiserfs filesystem copying program.
+.SH SYNOPSIS
+.B cpfs.reiserfs
+[ options ] device-from device-to
+.SH DESCRIPTION
+.B cpfs.reiserfs
+is a reiserfs filesystem copying program. It copyes filesystem from source device to
+destination. Program creates reiserfs filesystem on the target device with the same 
+parametes as the source filesystem and copyes all data blocks onto it. This is mean 
+that source and destination devices length may be different. Enought condition to 
+perform copying is data size on source device is lesser or equals destination device 
+length minus metadata size.
+.SH OPTIONS
+.TP
+.B -v, --version
+dispays current version
+.TP
+.B -u, --usage
+displays program usage
+.TP
+.B -j FILE, --journal-device=FILE
+journal device for separated journal
+.TP
+.B -n, --no-journal-available
+no journal device available now
+.TP
+.B -q, --quiet
+non-interactive mode
+.RS
+.SH REPORTING BUGS
+Report bugs to <torque@ukrpost.net>
+.SH SEE ALSO
+.BR mkfs.reiserfs (8),
+.BR tunefs.reiserfs (8),
+.BR resizefs.reiserfs (8)
+.SH AUTHOR
+This manual page was written by Yury Umanets <torque@ukrpost.net>
+
