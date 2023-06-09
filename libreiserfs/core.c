@@ -102,6 +102,9 @@ static int reiserfs_fs_journal_tune_check(reiserfs_fs_t *fs, dal_t *dal,
     blk_t start, blk_t len, blk_t max_trans, int relocated) 
 {
     reiserfs_journal_trans_t old_trans, new_trans;
+
+    (void)len;
+    (void)max_trans;
 	
     ASSERT(fs != NULL, return 0);
     ASSERT(dal != NULL, return 0);
@@ -138,6 +141,8 @@ static int reiserfs_fs_journal_switch_to_standard(reiserfs_fs_t *fs, dal_t *dal,
     reiserfs_gauge_t *gauge;
     blk_t root_blk, new_len, max_len;
     reiserfs_segment_t src_segment, dst_segment;
+
+    (void)dal;
 	
     if (!get_sb_reserved_for_journal(fs->super)) {
 	new_len = get_jp_len(get_sb_jp(fs->super));
@@ -990,6 +995,8 @@ static int reiserfs_fs_resize_check(reiserfs_fs_t *fs) {
 static int reiserfs_fs_metadata_move(reiserfs_fs_t *fs, long start, long end) {
     reiserfs_gauge_t *gauge;
     reiserfs_segment_t src_segment, dst_segment;
+
+    (void)end;
 	
     blk_t old_meta_off = fs->super_off + (start < 0 ? labs(start) : 0);
     blk_t new_meta_off = fs->super_off + (start < 0 ? 0 : labs(start));
@@ -1404,6 +1411,14 @@ static int reiserfs_fs_create_check(dal_t *host_dal, dal_t *journal_dal,
     blk_t fs_len, int relocated)
 {
     blk_t dev_len, tree_start;
+
+    (void)journal_dal;
+    (void)start;
+    (void)max_trans;
+    (void)format;
+    (void)hash;
+    (void)label;
+    (void)uuid;
 	
     ASSERT(host_dal != NULL, return 0);
 	
@@ -1571,7 +1586,7 @@ uint32_t reiserfs_fs_hash_value(reiserfs_fs_t *fs, const char *name) {
 	return DOT_DOT_OFFSET;
 	
     hash_func = reiserfs_fs_hash_func(reiserfs_fs_hash(fs));
-    hash_value = hash_func(name, strlen(name));
+    hash_value = hash_func((const signed char *)name, strlen(name));
 	
     hash_value = GET_HASH_VALUE(hash_value);
 	

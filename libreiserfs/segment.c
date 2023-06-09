@@ -56,7 +56,7 @@ static blk_t generic_node_write(struct reiserfs_reloc_desc *reloc, reiserfs_bloc
 	reiserfs_fs_bitmap_unuse_block(src_fs, reiserfs_block_get_nr(node) - 
 	labs(src_fs->tree->offset));
 	
-    offset = (reloc->smart ? labs(reloc->dst_segment->start - reloc->src_segment->start) : 0);
+    offset = (reloc->smart ? (reloc->dst_segment->start - reloc->src_segment->start) : 0);
 	
     /* Finding free block */
     if (!(dst_blk = reiserfs_fs_bitmap_find_free_block(dst_fs, reloc->dst_segment->start - 
@@ -83,6 +83,9 @@ static blk_t generic_node_write(struct reiserfs_reloc_desc *reloc, reiserfs_bloc
 
 /* Calback functions */
 static long callback_node_check(reiserfs_block_t *node, struct reiserfs_reloc_desc *reloc) {
+	(void)node;
+	(void)reloc;
+
     /* 
 	Some node checks must be here. This is because traverse function 
 	performs only basic checks like tree node level check.
@@ -143,6 +146,8 @@ static long callback_node_setup(reiserfs_block_t *node, struct reiserfs_reloc_de
 static long callback_chld_setup(reiserfs_block_t *node, uint32_t chld, long chld_blk, 
     struct reiserfs_reloc_desc *reloc)
 {
+	(void)reloc;
+
     set_dc_child_blocknr(get_node_disk_child(node, chld), (blk_t)chld_blk);
     reiserfs_block_mark_dirty(node);
     return 1;

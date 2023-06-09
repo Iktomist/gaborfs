@@ -50,6 +50,8 @@ static inline void default_gauge_header(const char *desc,
 static inline void default_gauge_footer(const char *desc, 
     reiserfs_gauge_type_t type) 
 {
+    (void)type;
+
     if (desc)
 	fputs(desc, stderr);
 }
@@ -57,6 +59,8 @@ static inline void default_gauge_footer(const char *desc,
 static void default_gauge_handler(const char *name, unsigned int value, 
     void *data, reiserfs_gauge_type_t type, reiserfs_gauge_state_t state)
 {
+    (void)data;
+
     if (state == REISERFS_GAUGE_STARTED)
 	default_gauge_header(name, type);
 	

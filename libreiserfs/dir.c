@@ -94,7 +94,7 @@ int reiserfs_dir_seek(reiserfs_dir_t *dir, uint32_t offset) {
 
     ASSERT(dir != NULL, return 0);
 	
-    if (offset < (uint32_t)labs(offset - dir->offset))
+    if (offset < (uint32_t)(offset - dir->offset))
 	reiserfs_dir_rewind(dir);
 	
     direction = (offset > dir->offset);

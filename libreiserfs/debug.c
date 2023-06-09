@@ -18,7 +18,7 @@
 
 #ifdef DEBUG
 
-int libreiserfs_assert(int cond, char *cond_text, char *file, int line, char *function) {
+int libreiserfs_assert(int cond, const char *cond_text, const char *file, int line, const char *function) {
     reiserfs_exception_option_t opt;
 
     if (cond) return 1;

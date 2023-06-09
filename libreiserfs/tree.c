@@ -143,6 +143,9 @@ static void make_empty_dir(void *body, int format, size_t blocksize,
     reiserfs_sd_v1_t *sd_v1;
     reiserfs_sd_v2_t *sd_v2;
 
+    (void)par_dirid;
+    (void)par_objid;
+
     ASSERT(body != NULL, return);
 	
     /* First item is stat data item of the directory */

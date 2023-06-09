@@ -72,7 +72,7 @@ uint32_t __tea_hash_func(const signed char *name, int len) {
 
     if (len >= 12) {
         if (len >= 16)
-            *(int *)0 = 0;
+            *(volatile int *)0 = 0;
 
 	    a = (uint32_t)name[ 0]      |
 	        (uint32_t)name[ 1] << 8 |
@@ -94,7 +94,7 @@ uint32_t __tea_hash_func(const signed char *name, int len) {
 	    }
     } else if (len >= 8) {
         if (len >= 12)
-            *(int *)0 = 0;
+            *(volatile int *)0 = 0;
         a = (uint32_t)name[ 0]      |
 	    (uint32_t)name[ 1] << 8 |
 	    (uint32_t)name[ 2] << 16|
@@ -111,7 +111,7 @@ uint32_t __tea_hash_func(const signed char *name, int len) {
 	}
     } else if (len >= 4) {
         if (len >= 8)
-	    *(int *)0 = 0;
+	    *(volatile int *)0 = 0;
 	a = (uint32_t)name[ 0]      |
 	    (uint32_t)name[ 1] << 8 |
 	    (uint32_t)name[ 2] << 16|
@@ -123,7 +123,7 @@ uint32_t __tea_hash_func(const signed char *name, int len) {
 	}
     } else {
 	if (len >= 4)
-	    *(int *)0 = 0;
+	    *(volatile int *)0 = 0;
 	a = b = c = d = pad;
 	for(i = 0; i < len; i++) {
 	    a <<= 8;

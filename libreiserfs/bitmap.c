@@ -201,6 +201,9 @@ static int callback_bitmap_fetch(dal_t *dal,
     blk_t blk, char *map, uint32_t chunk, void *data) 
 {
     reiserfs_block_t *block;
+
+    (void)data;
+
     if (!(block = reiserfs_block_read(dal, blk))) {
 	libreiserfs_exception_throw(EXCEPTION_ERROR, EXCEPTION_OK, 
 	    "Can't read bitmap block %lu. %s.", blk, dal_error(dal));
@@ -308,6 +311,8 @@ static uint32_t reiserfs_bitmap_resize_map(reiserfs_bitmap_t *bitmap,
     char *map;
     long i, right, journal_len, offset;
     long size = ((end - start) + 7) / 8;
+
+    (void)blocksize;
 	
     if (start == 0) {
 	int chunk;

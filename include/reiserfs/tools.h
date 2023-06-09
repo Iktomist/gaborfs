@@ -14,14 +14,14 @@
 
 typedef int (*reiserfs_comp_func_t)(void *item1, void *item2);
 
-extern inline int reiserfs_tools_set_bit(int nr, void *addr);
-extern inline int reiserfs_tools_clear_bit (int nr, void *addr);
-extern inline int reiserfs_tools_test_bit(int nr, const void *addr);
+extern int reiserfs_tools_set_bit(int nr, void *addr);
+extern int reiserfs_tools_clear_bit (int nr, void *addr);
+extern int reiserfs_tools_test_bit(int nr, const void *addr);
 
-extern inline int reiserfs_tools_find_first_zero_bit(
+extern int reiserfs_tools_find_first_zero_bit(
     const void *vaddr, unsigned size);
 
-extern inline int reiserfs_tools_find_next_zero_bit(
+extern int reiserfs_tools_find_next_zero_bit(
     const void *vaddr, unsigned size, unsigned offset);
 
 #define REISERFS_3_5_SUPER_SIGNATURE "ReIsErFs"

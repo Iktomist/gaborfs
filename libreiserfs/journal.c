@@ -454,6 +454,8 @@ struct reiserfs_replay_desc {
 static int callback_journal_replay(reiserfs_journal_t *journal, reiserfs_block_t *desc, 
     reiserfs_block_t *comm, uint32_t number, struct reiserfs_replay_desc *replay_desc) 
 {
+    (void)comm;
+
     if (replay_desc->gauge) {
 	libreiserfs_gauge_set_value(replay_desc->gauge, (unsigned int)((number * 100) / 
 	     get_jp_len(&journal->head.jh_params)) + 1);
@@ -484,6 +486,9 @@ blk_t reiserfs_journal_boundary_transactions(reiserfs_journal_t *journal,
 {
     reiserfs_gauge_t *gauge=NULL;
     struct reiserfs_replay_desc desc;
+
+    (void)oldest;
+    (void)newest;
 	
     desc.oldest_id = 0xffffffff; desc.newest_id = 0x0;
 	

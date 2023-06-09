@@ -12,6 +12,9 @@
 #include <reiserfs/reiserfs.h>
 
 long gathering_leaves(reiserfs_block_t *node, void *data) {
+	(void)node;
+	(void)data;
+
     return 1;	
 }
 

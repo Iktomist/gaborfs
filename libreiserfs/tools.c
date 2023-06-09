@@ -181,7 +181,7 @@ found_middle:
     return result + reiserfs_tools_ffz(SWAP32(tmp));
 }
 
-inline int reiserfs_tools_set_bit(int nr, void *addr) {
+int reiserfs_tools_set_bit(int nr, void *addr) {
 #ifndef WORDS_BIGENDIAN    
     return reiserfs_tools_le_set_bit(nr, addr);
 #else 
@@ -190,7 +190,7 @@ inline int reiserfs_tools_set_bit(int nr, void *addr) {
     return 0;
 }
 
-inline int reiserfs_tools_clear_bit(int nr, void *addr) {
+int reiserfs_tools_clear_bit(int nr, void *addr) {
 #ifndef WORDS_BIGENDIAN    
     return reiserfs_tools_le_clear_bit(nr, addr);
 #else 
@@ -199,7 +199,7 @@ inline int reiserfs_tools_clear_bit(int nr, void *addr) {
     return 0;
 }
 
-inline int reiserfs_tools_test_bit(int nr, const void *addr) {
+int reiserfs_tools_test_bit(int nr, const void *addr) {
 #ifndef WORDS_BIGENDIAN    
     return reiserfs_tools_le_test_bit(nr, addr);
 #else 
@@ -208,7 +208,7 @@ inline int reiserfs_tools_test_bit(int nr, const void *addr) {
     return 0;
 }
 
-inline int reiserfs_tools_find_first_zero_bit(const void *vaddr, unsigned size) {
+int reiserfs_tools_find_first_zero_bit(const void *vaddr, unsigned size) {
 #ifndef WORDS_BIGENDIAN    
     return reiserfs_tools_le_find_first_zero_bit(vaddr, size);
 #else 
@@ -217,7 +217,7 @@ inline int reiserfs_tools_find_first_zero_bit(const void *vaddr, unsigned size) 
     return 0;
 }
 
-inline int reiserfs_tools_find_next_zero_bit(const void *vaddr, unsigned size, unsigned offset) {
+int reiserfs_tools_find_next_zero_bit(const void *vaddr, unsigned size, unsigned offset) {
 #ifndef WORDS_BIGENDIAN    
     return reiserfs_tools_le_find_next_zero_bit(vaddr, size, offset);
 #else 

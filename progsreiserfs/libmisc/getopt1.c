@@ -63,6 +63,9 @@
 #define NULL 0
 #endif
 
+/* Defined in getopt.c */
+extern int _getopt_internal(int argc, char *const *argv, const char *optstring, const struct option *longopts, int *longind, int long_only);
+
 int
 	getopt_long(argc, argv, options, long_options, opt_index)
 	 int argc;
