@@ -172,7 +172,7 @@ uint64_t reiserfs_file_read(reiserfs_file_t *file, void *buffer, uint64_t size) 
 	return readed;
 	
     offset = file->offset;
-    while (reiserfs_file_seek(file, file->offset)) {
+    while (readed < size && reiserfs_file_seek(file, file->offset)) {
 	
 	if (!reiserfs_file_read_item(file, buffer + readed, size - readed))
 	    return readed;
