@@ -1,37 +1,17 @@
-This is a library for reiserfs filesystem access and manipulation.
-The primary goal is to develop the nice, full functionality library 
-wich might be linked against any projects which needed reiserfs filesystem 
-access. There are GNU Parted, GNU GRUB, Yaboot, Partimage, EVMS, etc.
 
-The second goal is high maintainability source code.
 
-The third goal is to develop an alternative set of the reiserfsprogs as 
-small and nice frontends to this library.
+here are my personal notes to myself that spawned the idea:
 
-For now progsreiserfs consists of:
-1. libreiserfs, which have a number of high level APIs for access reiserfs 
-   filesystem. There are: main filesystem code (reiserfs_fs_open, reiserfs_fs_close, 
-   resierfs_fs_create, reiserfs_fs_resize, reiserfs_fs_journal_tune, etc), journal 
-   code, bitmap code, directories and files access code and device abstraction layer.
-2. fouth progs which are simple frontends to libreiserfs. There are: mkfs.reiserfs,
-   resizefs.reiserfs, cpfs.reiserfs, tunefs.reiserfs.
-   
-progsreiserfs supports versions 3.5, 3.6 with standard and relocated journal.
-Also all possible blocksizes which supported by kernel (2.4.18 with patches or 2.4.19)
+when renderer is fixed, containerize this linux, render all images in cloud, train a neural datastructure for compression and gradient-domain processing, print non-fungible tokens and auto-post to all social medias with free timecoin value redeemable in terms of the minutes in their topology.
 
-The project homepage is http://reiserfs.linux.kiev.ua or http://reiserfs.osdn.org.ua
+so the same datastructure can do many things that are almost OS, and the bytecodelang I'm writing that aquinas actually is, isn't just something that communicates with the utmost attention to those fractal details of neural compression in the filesystem.
 
-In order to check whether libreiserfs works fine you should run regression tests which
-lie in debug directory. Just run *test* bash script. Unfortunately not the all features 
-will be tested (example, files and directory access API) because right testing requered 
-mounting of the loop device and mounting of reiserfs with blocksize which not equals 
-4096 bytes is dangerous yet!
+it's easy to deploy as a version of ubuntu if the filesystem is just based on neural compression; easy to modify the reiserfs???
 
-Send bug reports, requests for help, feature requests, comments, etc. to
-torque@ukrpost.net or umka@namesys.com. The authors can be contacted directly 
-(see the AUTHORS file).
+gotta be easier than writing it from scratch.
 
-Note, that for bulding this package on SunOS and FreeBSD, you should specifiy --disable-nls 
-option in configure time.
+hope people will join me on this weird journey; a filesystem that prints nfts? based not just on neural compression but on the structure of the brains of those things that go tweet?
 
-./configure --disable-nls
+but so far this fork is just a readme.
+
+stay tuned! ^_^
